@@ -44,7 +44,7 @@
 |toggle       |show or hide viewer                     |     |   |
 |show         |show viewer                             |     |   |
 |hide         |hide viewer                             |     |   |
-|isPickerShow |get status of viewer, return a boolean  |     |   |
+|isViewerShow |get status of viewer, return a boolean  |     |   |
 
 ## Usage
 ```javascript
