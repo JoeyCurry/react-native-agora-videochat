@@ -1,6 +1,7 @@
 # react-native-agora-videochatv 0.0.0
-[![npm version](https://img.shields.io/npm/v/react-native-agora-videochat.svg?style=flat-square)](https://www.npmjs.com/package/react-native-agora-videochat) <a href="https://david-dm.org/beefe/react-native-picker">
-![android-inCome](./readmeImg/android-Income.jpeg)
+[![npm version](https://img.shields.io/npm/v/react-native-agora-videochat.svg?style=flat-square)](https://www.npmjs.com/package/react-native-agora-videochat)
+
+![android视频呼入](./readmeImg/android-inCome.jpeg)
 
 ## Getting started
 
