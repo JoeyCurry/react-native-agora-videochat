@@ -1,7 +1,7 @@
 
 {
   "name": "react-native-agora-videochat",
-  "version": "0.0.1",
+  "version": "0.0.6",
   "description": "Agroa-videoChat",
   "main": "index.js",
   "scripts": {
@@ -10,6 +10,10 @@
   "keywords": [
     "react-native"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/JoeyCurry/react-native-agroa-videochat.git"
+  },
   "author": "jiangjun",
   "license": "MIT",
   "peerDependencies": {
