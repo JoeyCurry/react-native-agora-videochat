@@ -67,7 +67,7 @@ export default class example extends Component {
                             appId: data.app_id,
                             callState: 'inCome',
                             netStatus: 'wifi',
-                            introText: '邀请你视频问诊',
+                            introText: '邀请你视频',
                             hangin:(data)=>{
                                 console.log('---1---',data);
                             },
