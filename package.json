@@ -1,7 +1,7 @@
 
 {
   "name": "react-native-agora-videochat",
-  "version": "0.0.7",
+  "version": "0.0.13",
   "description": "Agroa-videoChat",
   "main": "index.js",
   "scripts": {

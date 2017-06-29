@@ -30,6 +30,12 @@
 |callState      |呼叫状态(呼入'inCome'/呼出'outPut')            |string   |''   |
 |netStatus       |网络状态('wifi'/'')            |string   |'' |
 |introText              |呼叫时显示的介绍文字            |string   |'' |
+|backgroundImage |呼入界面的背景图地址url           |string   |''   |
+|hanginImage  |接听图片地址url            |string   |''   |
+|hangupImage      |挂断图片地址url            |string   |''   |
+|muteImage       |允许自己声音的图片地址url            |string   |'' |
+|unmuteImage              |不允许自己声音的图片url            |string   |'' |
+|switchcameraImage              |切换摄像头的图片url            |string   |'' |
 |hangin       |接听视频呼叫            |function|                   |
 |hangup        |视频内终止视频            |function|                   |
 |hangupIncome        |拒绝视频呼叫            |function|                   |
@@ -60,6 +66,12 @@ Viewer.init({
     callState: 'inCome',
     netStatus: 'wifi',
     introText: '邀请你视频',
+    backgroundImage:'',
+    hanginImage:'',
+    hangupImage:'',
+    muteImage:'',
+    unmuteImage:'',
+    switchcameraImage:'',
     hangin:(data)=>{
         console.log('---1---',data);
     },

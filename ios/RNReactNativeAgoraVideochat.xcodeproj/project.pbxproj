@@ -7,6 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9137B3B21F04919000FDEB67 /* AgoraRtcEngineKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9137B3AC1F04912C00FDEB67 /* AgoraRtcEngineKit.framework */; };
+		9137B3B51F0491F900FDEB67 /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 9137B3B41F0491F900FDEB67 /* libresolv.tbd */; };
+		9137B3B71F04920800FDEB67 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9137B3B61F04920800FDEB67 /* CoreTelephony.framework */; };
+		9137B3B91F04921600FDEB67 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9137B3B81F04921600FDEB67 /* CoreMedia.framework */; };
+		9137B3BB1F04921D00FDEB67 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9137B3BA1F04921D00FDEB67 /* CoreMotion.framework */; };
+		9137B3BD1F04922800FDEB67 /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9137B3BC1F04922800FDEB67 /* VideoToolbox.framework */; };
+		9137B3BF1F04923300FDEB67 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9137B3BE1F04923300FDEB67 /* AudioToolbox.framework */; };
+		9137B3C11F04923D00FDEB67 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 9137B3C01F04923D00FDEB67 /* libc++.tbd */; };
+		9137B3C31F04924700FDEB67 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9137B3C21F04924700FDEB67 /* AVFoundation.framework */; };
+		9137B3C91F04932000FDEB67 /* CommunicationViewer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9137B3C61F04932000FDEB67 /* CommunicationViewer.m */; };
 		B3E7B58A1CC2AC0600A0062D /* RNReactNativeAgoraVideochat.m in Sources */ = {isa = PBXBuildFile; fileRef = B3E7B5891CC2AC0600A0062D /* RNReactNativeAgoraVideochat.m */; };
 /* End PBXBuildFile section */
 
@@ -24,6 +34,33 @@
 
 /* Begin PBXFileReference section */
 		134814201AA4EA6300B7C361 /* libRNReactNativeAgoraVideochat.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRNReactNativeAgoraVideochat.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		9137B39F1F04912C00FDEB67 /* AFHTTPSessionManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AFHTTPSessionManager.h; sourceTree = "<group>"; };
+		9137B3A01F04912C00FDEB67 /* AFHTTPSessionManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AFHTTPSessionManager.m; sourceTree = "<group>"; };
+		9137B3A11F04912C00FDEB67 /* AFNetworking.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AFNetworking.h; sourceTree = "<group>"; };
+		9137B3A21F04912C00FDEB67 /* AFNetworkReachabilityManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AFNetworkReachabilityManager.h; sourceTree = "<group>"; };
+		9137B3A31F04912C00FDEB67 /* AFNetworkReachabilityManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AFNetworkReachabilityManager.m; sourceTree = "<group>"; };
+		9137B3A41F04912C00FDEB67 /* AFSecurityPolicy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AFSecurityPolicy.h; sourceTree = "<group>"; };
+		9137B3A51F04912C00FDEB67 /* AFSecurityPolicy.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AFSecurityPolicy.m; sourceTree = "<group>"; };
+		9137B3A61F04912C00FDEB67 /* AFURLRequestSerialization.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AFURLRequestSerialization.h; sourceTree = "<group>"; };
+		9137B3A71F04912C00FDEB67 /* AFURLRequestSerialization.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AFURLRequestSerialization.m; sourceTree = "<group>"; };
+		9137B3A81F04912C00FDEB67 /* AFURLResponseSerialization.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AFURLResponseSerialization.h; sourceTree = "<group>"; };
+		9137B3A91F04912C00FDEB67 /* AFURLResponseSerialization.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AFURLResponseSerialization.m; sourceTree = "<group>"; };
+		9137B3AA1F04912C00FDEB67 /* AFURLSessionManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AFURLSessionManager.h; sourceTree = "<group>"; };
+		9137B3AB1F04912C00FDEB67 /* AFURLSessionManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AFURLSessionManager.m; sourceTree = "<group>"; };
+		9137B3AC1F04912C00FDEB67 /* AgoraRtcEngineKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AgoraRtcEngineKit.framework; sourceTree = "<group>"; };
+		9137B3AF1F04912C00FDEB67 /* libagora_fat.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libagora_fat.a; sourceTree = "<group>"; };
+		9137B3B01F04912C00FDEB67 /* libagoradep_fat.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libagoradep_fat.a; sourceTree = "<group>"; };
+		9137B3B41F0491F900FDEB67 /* libresolv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.tbd; path = usr/lib/libresolv.tbd; sourceTree = SDKROOT; };
+		9137B3B61F04920800FDEB67 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		9137B3B81F04921600FDEB67 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		9137B3BA1F04921D00FDEB67 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
+		9137B3BC1F04922800FDEB67 /* VideoToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VideoToolbox.framework; path = System/Library/Frameworks/VideoToolbox.framework; sourceTree = SDKROOT; };
+		9137B3BE1F04923300FDEB67 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		9137B3C01F04923D00FDEB67 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		9137B3C21F04924700FDEB67 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		9137B3C51F04931F00FDEB67 /* CommunicationViewer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommunicationViewer.h; sourceTree = "<group>"; };
+		9137B3C61F04932000FDEB67 /* CommunicationViewer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommunicationViewer.m; sourceTree = "<group>"; };
+		9137B4AF1F04BA6700FDEB67 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B3E7B5881CC2AC0600A0062D /* RNReactNativeAgoraVideochat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNReactNativeAgoraVideochat.h; sourceTree = "<group>"; };
 		B3E7B5891CC2AC0600A0062D /* RNReactNativeAgoraVideochat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNReactNativeAgoraVideochat.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -33,6 +70,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9137B3C31F04924700FDEB67 /* AVFoundation.framework in Frameworks */,
+				9137B3C11F04923D00FDEB67 /* libc++.tbd in Frameworks */,
+				9137B3BF1F04923300FDEB67 /* AudioToolbox.framework in Frameworks */,
+				9137B3BD1F04922800FDEB67 /* VideoToolbox.framework in Frameworks */,
+				9137B3BB1F04921D00FDEB67 /* CoreMotion.framework in Frameworks */,
+				9137B3B91F04921600FDEB67 /* CoreMedia.framework in Frameworks */,
+				9137B3B71F04920800FDEB67 /* CoreTelephony.framework in Frameworks */,
+				9137B3B51F0491F900FDEB67 /* libresolv.tbd in Frameworks */,
+				9137B3B21F04919000FDEB67 /* AgoraRtcEngineKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -50,10 +96,61 @@
 		58B511D21A9E6C8500147676 = {
 			isa = PBXGroup;
 			children = (
+				9137B4AF1F04BA6700FDEB67 /* Info.plist */,
+				9137B3C51F04931F00FDEB67 /* CommunicationViewer.h */,
+				9137B3C61F04932000FDEB67 /* CommunicationViewer.m */,
 				B3E7B5881CC2AC0600A0062D /* RNReactNativeAgoraVideochat.h */,
 				B3E7B5891CC2AC0600A0062D /* RNReactNativeAgoraVideochat.m */,
 				134814211AA4EA7D00B7C361 /* Products */,
+				9137B39D1F04912C00FDEB67 /* libs */,
+				9137B3B31F0491F900FDEB67 /* Frameworks */,
 			);
+			sourceTree = "<group>";
+		};
+		9137B39D1F04912C00FDEB67 /* libs */ = {
+			isa = PBXGroup;
+			children = (
+				9137B39E1F04912C00FDEB67 /* AFNetworking */,
+				9137B3AC1F04912C00FDEB67 /* AgoraRtcEngineKit.framework */,
+				9137B3AF1F04912C00FDEB67 /* libagora_fat.a */,
+				9137B3B01F04912C00FDEB67 /* libagoradep_fat.a */,
+			);
+			path = libs;
+			sourceTree = "<group>";
+		};
+		9137B39E1F04912C00FDEB67 /* AFNetworking */ = {
+			isa = PBXGroup;
+			children = (
+				9137B39F1F04912C00FDEB67 /* AFHTTPSessionManager.h */,
+				9137B3A01F04912C00FDEB67 /* AFHTTPSessionManager.m */,
+				9137B3A11F04912C00FDEB67 /* AFNetworking.h */,
+				9137B3A21F04912C00FDEB67 /* AFNetworkReachabilityManager.h */,
+				9137B3A31F04912C00FDEB67 /* AFNetworkReachabilityManager.m */,
+				9137B3A41F04912C00FDEB67 /* AFSecurityPolicy.h */,
+				9137B3A51F04912C00FDEB67 /* AFSecurityPolicy.m */,
+				9137B3A61F04912C00FDEB67 /* AFURLRequestSerialization.h */,
+				9137B3A71F04912C00FDEB67 /* AFURLRequestSerialization.m */,
+				9137B3A81F04912C00FDEB67 /* AFURLResponseSerialization.h */,
+				9137B3A91F04912C00FDEB67 /* AFURLResponseSerialization.m */,
+				9137B3AA1F04912C00FDEB67 /* AFURLSessionManager.h */,
+				9137B3AB1F04912C00FDEB67 /* AFURLSessionManager.m */,
+			);
+			path = AFNetworking;
+			sourceTree = "<group>";
+		};
+		9137B3B31F0491F900FDEB67 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9137B3C21F04924700FDEB67 /* AVFoundation.framework */,
+				9137B3C01F04923D00FDEB67 /* libc++.tbd */,
+				9137B3BE1F04923300FDEB67 /* AudioToolbox.framework */,
+				9137B3BC1F04922800FDEB67 /* VideoToolbox.framework */,
+				9137B3BA1F04921D00FDEB67 /* CoreMotion.framework */,
+				9137B3B81F04921600FDEB67 /* CoreMedia.framework */,
+				9137B3B61F04920800FDEB67 /* CoreTelephony.framework */,
+				9137B3B41F0491F900FDEB67 /* libresolv.tbd */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -112,6 +209,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9137B3C91F04932000FDEB67 /* CommunicationViewer.m in Sources */,
 				B3E7B58A1CC2AC0600A0062D /* RNReactNativeAgoraVideochat.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -196,13 +294,20 @@
 		58B511F01A9E6C8500147676 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/libs",
+				);
 				HEADER_SEARCH_PATHS = (
-				"$(inherited)",
+					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"$(SRCROOT)/../../../React/**",
 					"$(SRCROOT)/../../react-native/React/**",
 				);
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/libs",
+				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = RNReactNativeAgoraVideochat;
 				SKIP_INSTALL = YES;
@@ -212,13 +317,20 @@
 		58B511F11A9E6C8500147676 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/libs",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"$(SRCROOT)/../../../React/**",
 					"$(SRCROOT)/../../react-native/React/**",
 				);
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/libs",
+				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = RNReactNativeAgoraVideochat;
 				SKIP_INSTALL = YES;

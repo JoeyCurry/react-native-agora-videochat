@@ -7,15 +7,15 @@
     "test": "jest"
   },
   "dependencies": {
-    "react": "16.0.0-alpha.12",
-    "react-native": "0.45.1",
-    "react-native-agora-videochat": "0.0.5"
+    "react": "16.0.0-alpha.6",
+    "react-native": "0.44.0",
+    "react-native-agora-videochat": "0.0.12"
   },
   "devDependencies": {
     "babel-jest": "20.0.3",
     "babel-preset-react-native": "2.0.0",
     "jest": "20.0.4",
-    "react-test-renderer": "16.0.0-alpha.12"
+    "react-test-renderer": "16.0.0-alpha.6"
   },
   "jest": {
     "preset": "react-native"
