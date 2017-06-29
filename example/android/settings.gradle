@@ -1,3 +1,5 @@
 rootProject.name = 'example'
+include ':react-native-agora-videochat'
+project(':react-native-agora-videochat').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-agora-videochat/android')
 
 include ':app'
