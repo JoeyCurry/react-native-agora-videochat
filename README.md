@@ -7,6 +7,7 @@
 [![npm version](https://img.shields.io/npm/v/react-native-agora-videochat.svg?style=flat-square)](https://www.npmjs.com/package/react-native-agora-videochat)
 
 ![android视频呼入](./readmeImg/android-inCome.jpeg)
+![ios视频呼入](./readmeImg/ios-inCome.jpeg)
 
 ## Getting started
 
