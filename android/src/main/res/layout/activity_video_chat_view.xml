@@ -26,9 +26,9 @@
 
     <RelativeLayout
         android:id="@+id/container"
+        android:background="@android:color/white"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@mipmap/background"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true">
@@ -43,7 +43,6 @@
 
         <TextView
             android:id="@+id/calltext"
-            android:text="张小凡医生"
             android:textSize="18sp"
             android:textColor="@android:color/black"
             android:layout_centerHorizontal="true"
@@ -98,32 +97,32 @@
                     <!--android:src="@drawable/btn_voice" />-->
 
                 <ImageView
+                    android:id="@+id/audioMute"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="20"
                     android:onClick="onLocalAudioMuteClicked"
                     android:scaleType="centerInside"
-                    android:src="@mipmap/unmute"
-                    android:id="@+id/imageView3" />
+                />
 
 
                 <ImageView
+                    android:id="@+id/hangup"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="20"
                     android:onClick="onEncCallClicked"
                     android:scaleType="centerInside"
-                    android:src="@mipmap/hangup"
-                    android:id="@+id/imageView" />
+                />
 
                 <ImageView
+                    android:id="@+id/switchCamera"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="20"
                     android:onClick="onSwitchCameraClicked"
                     android:scaleType="centerInside"
-                    android:src="@mipmap/switchcamera"
-                    android:id="@+id/imageView2" />
+                />
 
             </LinearLayout>
         </LinearLayout>
@@ -148,7 +147,7 @@
                     android:layout_width="67dp"
                     android:layout_height="67dp"
                     android:scaleType="centerInside"
-                    android:src="@mipmap/hangup" />
+                    />
 
                 <TextView
                     android:text="拒绝"
@@ -172,7 +171,7 @@
                     android:layout_width="67dp"
                     android:layout_height="67dp"
                     android:scaleType="centerInside"
-                    android:src="@mipmap/hangin" />
+                    />
 
                 <TextView
                     android:text="接听"

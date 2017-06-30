@@ -2,13 +2,15 @@
 
 #### 正在开发中...  
 
-进度:安卓视频呼入0.0.1 -- ios视频呼入0.0.1 -- ios视频呼出0.0.1
+进度:安卓视频呼入0.0.1 -- ios视频呼入0.0.1 -- 安卓视频呼出0.0.1 -- ios视频呼出0.0.1 -- 安卓视频通信0.0.0 -- ios视频通信0.0.0
 
 [![npm version](https://img.shields.io/npm/v/react-native-agora-videochat.svg?style=flat-square)](https://www.npmjs.com/package/react-native-agora-videochat)
 
 ![android视频呼入](./readmeImg/android-inCome.jpeg)
 ![ios视频呼入](./readmeImg/ios-inCome.jpeg)
+![android视频呼出](./readmeImg/android-outPut.jpeg)
 ![ios视频呼出](./readmeImg/ios-outPut.png)
+
 
 ## Getting started
 
@@ -44,7 +46,7 @@
 |channelName |声网的channelName           |string   |""   |
 |appId  |声网的appid            |string   |""   |
 |callState      |呼叫状态(呼入'inCome'/呼出'outPut')            |string   |""   |
-|netStatus       |网络状态('wifi'/'')            |string   |"" |
+|netStatus       |网络状态('wifi'/'others')            |string   |"" |
 |introText              |呼叫时显示的介绍文字            |string   |"" |
 |backgroundImage |呼入界面的背景图地址url           |string   |""   |
 |hanginImage  |接听图片地址url            |string   |""   |
@@ -72,7 +74,6 @@
 ```javascript
 import Viewer from 'react-native-agora-videochat';
 
-// TODO: What to do with the module?
 Viewer.init({
     remoteName:'张小凡',
     remoteHeader: '',
@@ -93,6 +94,7 @@ Viewer.init({
     },
     hangup:(data)=>{
         console.log('---2---',data);
+        Viewer.hide();
     },
     hangupIncome:(data)=>{
         console.log('---3---',data);
@@ -100,6 +102,7 @@ Viewer.init({
     },
     hangupCalling:(data)=>{
         console.log('---4---',data);
+        Viewer.hide();
     },
     hangupByPeer:(data)=>{
         console.log('---5---',data);
