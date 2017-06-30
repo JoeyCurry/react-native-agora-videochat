@@ -2,16 +2,31 @@
 
 #### 正在开发中...  
 
-进度:安卓视频呼入0.0.1 -- ios视频呼入0.0.1
+进度:安卓视频呼入0.0.1 -- ios视频呼入0.0.1 -- ios视频呼出0.0.1
 
 [![npm version](https://img.shields.io/npm/v/react-native-agora-videochat.svg?style=flat-square)](https://www.npmjs.com/package/react-native-agora-videochat)
 
 ![android视频呼入](./readmeImg/android-inCome.jpeg)
 ![ios视频呼入](./readmeImg/ios-inCome.jpeg)
+![ios视频呼出](./readmeImg/ios-outPut.png)
 
 ## Getting started
 
 `$ npm install react-native-agora-videochat --save`
+
+#### ios使用说明
+
+1.需在你所在的项目`Build Phases`中` Link Binary with Libraries`添加如下图的库
+
+![ios库](./readmeImg/ios-lib.jpeg)
+
+2.更改`Build Setting`中的`Enable Bitcode`为`NO`;
+
+3.在 info.plist 进行授权操作:
+
+将 Privacy - Camera Usage Description 设置为 use camera to start video call
+
+将 Privacy - Microphone Usage Description 设置为 use microphone to start video call
 
 ### Mostly automatic installation
 

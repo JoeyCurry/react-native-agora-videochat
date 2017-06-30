@@ -8,13 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		9137B3B21F04919000FDEB67 /* AgoraRtcEngineKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9137B3AC1F04912C00FDEB67 /* AgoraRtcEngineKit.framework */; };
-		9137B3B51F0491F900FDEB67 /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 9137B3B41F0491F900FDEB67 /* libresolv.tbd */; };
 		9137B3B71F04920800FDEB67 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9137B3B61F04920800FDEB67 /* CoreTelephony.framework */; };
 		9137B3B91F04921600FDEB67 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9137B3B81F04921600FDEB67 /* CoreMedia.framework */; };
 		9137B3BB1F04921D00FDEB67 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9137B3BA1F04921D00FDEB67 /* CoreMotion.framework */; };
 		9137B3BD1F04922800FDEB67 /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9137B3BC1F04922800FDEB67 /* VideoToolbox.framework */; };
 		9137B3BF1F04923300FDEB67 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9137B3BE1F04923300FDEB67 /* AudioToolbox.framework */; };
-		9137B3C11F04923D00FDEB67 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 9137B3C01F04923D00FDEB67 /* libc++.tbd */; };
 		9137B3C31F04924700FDEB67 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9137B3C21F04924700FDEB67 /* AVFoundation.framework */; };
 		9137B3C91F04932000FDEB67 /* CommunicationViewer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9137B3C61F04932000FDEB67 /* CommunicationViewer.m */; };
 		B3E7B58A1CC2AC0600A0062D /* RNReactNativeAgoraVideochat.m in Sources */ = {isa = PBXBuildFile; fileRef = B3E7B5891CC2AC0600A0062D /* RNReactNativeAgoraVideochat.m */; };
@@ -71,13 +69,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				9137B3C31F04924700FDEB67 /* AVFoundation.framework in Frameworks */,
-				9137B3C11F04923D00FDEB67 /* libc++.tbd in Frameworks */,
 				9137B3BF1F04923300FDEB67 /* AudioToolbox.framework in Frameworks */,
 				9137B3BD1F04922800FDEB67 /* VideoToolbox.framework in Frameworks */,
 				9137B3BB1F04921D00FDEB67 /* CoreMotion.framework in Frameworks */,
 				9137B3B91F04921600FDEB67 /* CoreMedia.framework in Frameworks */,
 				9137B3B71F04920800FDEB67 /* CoreTelephony.framework in Frameworks */,
-				9137B3B51F0491F900FDEB67 /* libresolv.tbd in Frameworks */,
 				9137B3B21F04919000FDEB67 /* AgoraRtcEngineKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -294,6 +290,7 @@
 		58B511F01A9E6C8500147676 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/libs",
@@ -317,6 +314,7 @@
 		58B511F11A9E6C8500147676 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/libs",

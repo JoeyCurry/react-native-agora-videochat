@@ -189,7 +189,7 @@
     self.remoteVideo.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
     
     self.callText2=[[UILabel alloc] initWithFrame:CGRectMake(150, 50, 300, 100)];
-    self.callText2.text = @"正在等待对方接受邀请...";
+    self.callText2.text = self.introText;
     self.callText2.textColor = [UIColor whiteColor];
     self.callText2.font = [UIFont systemFontOfSize:18];
     self.callText2.lineBreakMode = NSLineBreakByTruncatingHead;//设置换行模式
@@ -210,22 +210,25 @@
     //hangupbutton终止呼叫
     self.hangupbutton = [UIButton buttonWithType:(UIButtonTypeCustom)];
     self.hangupbutton.frame = CGRectMake(SCREEN_WIDTH/2 - 40, SCREEN_HEIGHT - 130, 80, 80);
-    [self.hangupbutton setBackgroundImage:[UIImage imageNamed:@"hangupwait"] forState:UIControlStateNormal];
+    UIImage * hangupImage = [self getImageFromURL:self.hangupImage];
+    [self.hangupbutton setBackgroundImage:hangupImage forState:UIControlStateNormal];
     [self.hangupbutton addTarget:self action:@selector(hangupCalling) forControlEvents:(UIControlEventTouchUpInside)];
     //hangupbutton2视频内挂断视频
     self.hangupbutton2 = [UIButton buttonWithType:(UIButtonTypeCustom)];
     self.hangupbutton2.frame = CGRectMake(SCREEN_WIDTH/2 - 30, SCREEN_HEIGHT - 130, 60, 60);
-    [self.hangupbutton2 setBackgroundImage:[UIImage imageNamed:@"hangupwait"] forState:UIControlStateNormal];
+    [self.hangupbutton2 setBackgroundImage:hangupImage forState:UIControlStateNormal];
     [self.hangupbutton2 addTarget:self action:@selector(hangupbutton2:) forControlEvents:(UIControlEventTouchUpInside)];
     //switchCamera切换摄像头
     self.switchCamera = [UIButton buttonWithType:(UIButtonTypeCustom)];
     self.switchCamera.frame = CGRectMake(SCREEN_WIDTH/2 + 90, SCREEN_HEIGHT - 130, 60, 60);
-    [self.switchCamera setBackgroundImage:[UIImage imageNamed:@"switchcamera"] forState:UIControlStateNormal];
+    UIImage * switchcameraImage = [self getImageFromURL:self.switchcameraImage];
+    [self.switchCamera setBackgroundImage:switchcameraImage forState:UIControlStateNormal];
     [self.switchCamera addTarget:self action:@selector(switchCamera:) forControlEvents:(UIControlEventTouchUpInside)];
     //switchbutton切换是否关闭麦克风
     self.switchbutton = [UIButton buttonWithType:(UIButtonTypeCustom)];
     self.switchbutton.frame = CGRectMake(SCREEN_WIDTH/2 - 150, SCREEN_HEIGHT - 130, 60, 60);
-    [self.switchbutton setBackgroundImage:[UIImage imageNamed:@"unmute"] forState:UIControlStateNormal];
+    UIImage * unmuteImage = [self getImageFromURL:self.unmuteImage];
+    [self.switchbutton setBackgroundImage:unmuteImage forState:UIControlStateNormal];
     [self.switchbutton addTarget:self action:@selector(switchbutton:) forControlEvents:(UIControlEventTouchUpInside)];
     
     [view addSubview:self.remoteVideo];
@@ -261,16 +264,16 @@
 
 // Tutorial Step 1
 - (void)initializeAgoraEngine {
-  self.agoraKit = [AgoraRtcEngineKit sharedEngineWithAppId:self.appId delegate:self];
+    self.agoraKit = [AgoraRtcEngineKit sharedEngineWithAppId:self.appId delegate:self];
 }
 
 // Tutorial Step 2
 - (void)setupVideo {
-  [self.agoraKit enableVideo];
-  // Default mode is disableVideo
+    [self.agoraKit enableVideo];
+    // Default mode is disableVideo
   
-  [self.agoraKit setVideoProfile:AgoraRtc_VideoProfile_720P swapWidthAndHeight: false];
-  // Default video profile is 360P
+    [self.agoraKit setVideoProfile:AgoraRtc_VideoProfile_720P swapWidthAndHeight: false];
+    // Default video profile is 360P
 }
 
 //// Tutorial Step 3
@@ -282,6 +285,9 @@
   videoCanvas.view = self.localVideo;
   videoCanvas.renderMode = AgoraRtc_Render_Hidden;
   [self.agoraKit setupLocalVideo:videoCanvas];
+  if ([self.callState isEqualToString:@"outPut"]) {
+    [self.agoraKit startPreview];
+  }
   //    [self.agoraKit startPreview];
   // Bind local video stream to view
 }

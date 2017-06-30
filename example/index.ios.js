@@ -65,9 +65,9 @@ export default class example extends Component {
                             channelKey: channel_data.key,
                             channelName: channel_data.channel_name,
                             appId: data.app_id,
-                            callState: 'inCome',
+                            callState: 'outPut',
                             netStatus: 'wifi',
-                            introText: '邀请你视频',
+                            introText: '等待对方接听视频...',
                             backgroundImage:TEST_IMAGE_URL + 'v_background.png',
                             hanginImage:TEST_IMAGE_URL + 'v_hangin.png',
                             hangupImage:TEST_IMAGE_URL + 'v_hangupwait.png',
@@ -86,6 +86,7 @@ export default class example extends Component {
                             },
                             hangupCalling:(data)=>{
                                 console.log('---4---',data);
+                                Viewer.hide();
                             },
                             hangupByPeer:(data)=>{
                                 console.log('---5---',data);
