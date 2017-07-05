@@ -18,7 +18,7 @@
 
 #### ios使用说明
 
-1.需在你所在的项目`Build Phases`中` Link Binary with Libraries`添加如下图的库(其中`AgoraRtcEngineKit.framework `为[声网ios库](https://www.agora.io/cn/blog/download/))
+1.需在你所在的项目`Build Phases`中` Link Binary with Libraries`添加如下图的库(其中`AgoraRtcEngineKit.framework `为[声网ios库](https://www.agora.io/cn/blog/download/))(请先暂时使用我上传的sdk，现在还暂未适配到最新的sdk)
 
 ![ios库](./readmeImg/ios-lib.jpeg)
 
