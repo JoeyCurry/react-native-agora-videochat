@@ -4,7 +4,7 @@
 
 ### 最近公司项目APP大更新，赶的比较紧，这个也碰到一个bug在解决。公司APP今明两天应该能结束，然后我会继续这个项目的开发。
 
-进度:安卓视频呼入0.0.1 -- ios视频呼入0.0.1 -- 安卓视频呼出0.0.1 -- ios视频呼出0.0.1 -- 安卓视频通信0.0.1 -- ios视频通信0.0.0
+进度:安卓视频呼入0.0.1 -- ios视频呼入0.0.1 -- 安卓视频呼出0.0.1 -- ios视频呼出0.0.1 -- 安卓视频通信0.0.1 -- ios视频通信0.0.1
 
 [![npm version](https://img.shields.io/npm/v/react-native-agora-videochat.svg?style=flat-square)](https://www.npmjs.com/package/react-native-agora-videochat)
 
@@ -13,6 +13,7 @@
 ![android视频呼出](./readmeImg/android-outPut.jpeg)
 ![ios视频呼出](./readmeImg/ios-outPut.png)
 ![android视频通话](./readmeImg/androidChat.jpeg)
+![ios视频通话](./readmeImg/iosChat.jpeg)
 
 
 ## Getting started

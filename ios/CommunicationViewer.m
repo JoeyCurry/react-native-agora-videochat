@@ -345,6 +345,13 @@
   [dic setValue:@"hangupByPeer" forKey:@"type"];
   self.bolock(dic);
   [self leaveChannel];
+  
+  dispatch_async(dispatch_get_main_queue(), ^{
+    [UIView animateWithDuration:.2f animations:^{
+      
+      [self setFrame:CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH, SCREEN_HEIGHT)];
+    }];
+  });
 }
 
 // Tutorial Step 8
@@ -418,6 +425,7 @@
   self.callName.hidden = true;
   self.callText.hidden = true;
   self.callText1.hidden = true;
+  self.callText2.hidden = true;
   self.callTexthangin.hidden = true;
   self.callTexthangup.hidden = true;
   self.localVideo.hidden = false;
@@ -435,6 +443,13 @@
   [dic setObject:@200 forKey:@"status"];
   [dic setValue:@"hangupIncome" forKey:@"type"];
   self.bolock(dic);
+  
+  dispatch_async(dispatch_get_main_queue(), ^{
+    [UIView animateWithDuration:.2f animations:^{
+      
+      [self setFrame:CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH, SCREEN_HEIGHT)];
+    }];
+  });
 }
 
 //停止呼叫
@@ -443,6 +458,13 @@
   [dic setObject:@200 forKey:@"status"];
   [dic setValue:@"hangupCalling" forKey:@"type"];
   self.bolock(dic);
+  
+  dispatch_async(dispatch_get_main_queue(), ^{
+    [UIView animateWithDuration:.2f animations:^{
+      
+      [self setFrame:CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH, SCREEN_HEIGHT)];
+    }];
+  });
 }
 
 //接听来电
@@ -451,6 +473,13 @@
   [dic setObject:@200 forKey:@"status"];
   [dic setValue:@"hangin" forKey:@"type"];
   self.bolock(dic);
+  
+//  [self.inst channelJoin:self.channelName ];
+  [self initializeAgoraEngine];   // Tutorial Step 1
+  [self setupVideo];              // Tutorial Step 2
+  [self setupLocalVideo];         // Tutorial Step 3
+  [self joinChannel];
+  
 }
 
 //挂断电话
@@ -460,6 +489,13 @@
   [dic setObject:@200 forKey:@"status"];
   [dic setValue:@"hangup" forKey:@"type"];
   self.bolock(dic);
+  
+  dispatch_async(dispatch_get_main_queue(), ^{
+    [UIView animateWithDuration:.2f animations:^{
+      
+      [self setFrame:CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH, SCREEN_HEIGHT)];
+    }];
+  });
 }
 
 //切换是否关闭麦克风

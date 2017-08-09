@@ -8,8 +8,8 @@
   },
   "dependencies": {
     "react": "16.0.0-alpha.6",
-    "react-native": "0.42.3",
-    "react-native-agora-videochat": "0.0.28"
+    "react-native": "0.44.0",
+    "react-native-agora-videochat": "0.0.29"
   },
   "devDependencies": {
     "babel-jest": "20.0.3",
