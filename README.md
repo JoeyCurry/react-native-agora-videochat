@@ -6,6 +6,10 @@
 
 进度:安卓视频呼入0.0.1 -- ios视频呼入0.0.1 -- 安卓视频呼出0.0.1 -- ios视频呼出0.0.1 -- 安卓视频通信0.0.1 -- ios视频通信0.0.1
 
+现在0.29这个版本功能基本完成，视频已经可以建立了。
+
+现在原生代码写的比较乱，接下来会继续优化代码重构一下。然后添加音频通话，网络状态不佳时自动转音频等功能。
+
 [![npm version](https://img.shields.io/npm/v/react-native-agora-videochat.svg?style=flat-square)](https://www.npmjs.com/package/react-native-agora-videochat)
 
 ![android视频呼入](./readmeImg/android-inCome.jpeg)
