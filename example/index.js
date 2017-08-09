@@ -22,7 +22,7 @@ const CHANNELKEY_URL = BASE_AGORA_URL + 'channel_key'; // 登录声网信令所�
 
 export default class example extends Component {
 
-      _getAgoraChannelKey(){
+      _getAgoraChannelKey(status){
         // this._loading();
         fetch(CHANNELKEY_URL,{
             method: 'post',
@@ -65,9 +65,10 @@ export default class example extends Component {
                             channelKey: channel_data.key,
                             channelName: channel_data.channel_name,
                             appId: data.app_id,
-                            callState: 'outPut',
+                            callState: status,
                             netStatus: 'wifi',
                             introText: '等待对方接听视频...',
+                            videoProfile:50,
                             backgroundImage:TEST_IMAGE_URL + 'v_background.png',
                             hanginImage:TEST_IMAGE_URL + 'v_hangin.png',
                             hangupImage:TEST_IMAGE_URL + 'v_hangupwait.png',
@@ -93,23 +94,6 @@ export default class example extends Component {
                             },
                         });
                         Viewer.show();
-                        // NativeModules.AgoraModule.AgoraSignalLogin(
-                        //     data.app_id,
-                        //     data.token,
-                        //     PatientNxid
-                        // );
-                        // //有视频呼叫进入时的回调
-                        // NativeModules.AgoraModule.AgoraInviteCallback(
-                        //     (account,extra)=>{
-                        //         console.log('AgoraInviteCallback',account,extra);
-                        //         let str = eval('(' + extra + ')'); 
-                        //         let value = {
-                        //             account,
-                        //             orderId:str.orderId
-                        //         }
-                        //         this.dispatch(videoAction(INCALL,value));
-                        //     }
-                        // );
                     }else{
                         console.log(responseData.msg);
                     }
@@ -128,9 +112,14 @@ export default class example extends Component {
     render() {
         return (
         <View style={styles.container}>
-            <TouchableOpacity onPress={()=>{this._getAgoraChannelKey()}}>
+            <TouchableOpacity onPress={()=>{this._getAgoraChannelKey('outPut')}}>
                 <Text style={styles.welcome}>
-                点击视频相关
+                发起视频
+                </Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={()=>{this._getAgoraChannelKey('inCome')}}>
+                <Text style={styles.welcome}>
+                接收视频
                 </Text>
             </TouchableOpacity>
         </View>

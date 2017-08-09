@@ -12,10 +12,12 @@ import android.graphics.PixelFormat;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.util.Log;
+import android.util.SparseArray;
 import android.view.Gravity;
 import android.view.SurfaceView;
 import android.view.View;
@@ -56,6 +58,10 @@ public class RNReactNativeAgoraVideochatModule extends ReactContextBaseJavaModul
     private final static String REACT_NAME = "CommunicationView";
     private final static String PICKER_EVENT_NAME = "viewEvent";
     private static final String TAG = "CommunicationViewModule";
+
+    private final static int REMOTEVIDEO_FLAG = 1;
+    private final static int LOCALVIDEORESET_FLAG = 2;
+    private final static int COMMECTHIDE_FLAG = 3;
 
     private RtcEngine mRtcEngine;// Tutorial Step 1
 
@@ -111,6 +117,14 @@ public class RNReactNativeAgoraVideochatModule extends ReactContextBaseJavaModul
     private Context mContent;
     private Boolean ChannelFlag;
 
+    private Handler mHandler = null;
+    private SurfaceView remoteSurfaceView = null;
+    private SurfaceView localSurfaceView = null;
+    private RelativeLayout.LayoutParams localframeParams;
+    private RelativeLayout mainLayout;
+    private ReadableMap options;
+    private SparseArray<SurfaceView> mSurfaceViews;
+
     public RNReactNativeAgoraVideochatModule(ReactApplicationContext reactContext) {
         super(reactContext);
         mContent = reactContext;
@@ -154,27 +168,105 @@ public class RNReactNativeAgoraVideochatModule extends ReactContextBaseJavaModul
                 }
             });
         }
+
+        @Override
+        public void onLeaveChannel(RtcStats stats) {
+            super.onLeaveChannel(stats);
+            Log.d(TAG, "onLeaveChannel: " + stats);
+            mRtcEngine.stopPreview();
+            RtcEngine.destroy();
+        }
+
+        @Override
+        public void onError(int err) {
+            super.onError(err);
+            Log.d(TAG, "onError: " + err);
+        }
+
+        @Override
+        public void onCameraReady() {
+            super.onCameraReady();
+            Log.d(TAG, "onCameraReady: ok");
+        }
     };
+
+    class MyHandle extends Handler {
+
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case REMOTEVIDEO_FLAG:
+                    Bundle bundle = msg.getData();
+                    int uid = bundle.getInt("uid");
+                    remoteSurfaceView = RtcEngine.CreateRendererView(mContent);
+                    remoteContent.addView(remoteSurfaceView);
+                    mRtcEngine.setupRemoteVideo(new VideoCanvas(remoteSurfaceView, VideoCanvas.RENDER_MODE_HIDDEN, uid));
+                    remoteSurfaceView.setTag(uid); // for mark purpose
+                    localframeParams = (RelativeLayout.LayoutParams) localContent.getLayoutParams();
+                    localframeParams.width = 300;
+                    localframeParams.height = 400;
+                    localframeParams.setMargins(0,50,50,0);
+                    localContent.setLayoutParams(localframeParams);
+                    connectShow();
+                    break;
+//                case LOCALVIDEORESET_FLAG:
+//                    Log.d(TAG, "run: 22222");
+//                    localframeParams = (RelativeLayout.LayoutParams) localContent.getLayoutParams();
+//                    localframeParams.width = MATCH_PARENT;
+//                    localframeParams.height = MATCH_PARENT;
+//                    localframeParams.setMargins(0,0,0,0);
+//                    localContent.setLayoutParams(localframeParams);
+//                    break;
+//                case COMMECTHIDE_FLAG:
+//                    if (callState.equals("inCome")) {
+//                        normalLoadBackground.getPicture(backgroundImage,container);
+//                        netStatusTextView.setVisibility(View.VISIBLE);
+//                    }
+//
+//                    remoteContent.setVisibility(View.GONE);
+//                    localContent.setVisibility(View.GONE);
+//                    headerImage.setVisibility(View.VISIBLE);
+//                    controlLayoutwait.setVisibility(View.VISIBLE);
+//                    controlLayout.setVisibility(View.GONE);
+//                    calltext.setVisibility(View.VISIBLE);
+//                    introTextView.setVisibility(View.VISIBLE);
+//                    remoteContent.removeAllViews();
+//                    break;
+            }
+
+        }
+    }
+
+    private void connectShow(){
+        if (callState.equals("inCome")) {
+            container.setBackgroundResource(0);
+            netStatusTextView.setVisibility(View.GONE);
+        }
+
+        remoteContent.setVisibility(View.VISIBLE);
+        localContent.setVisibility(View.VISIBLE);
+        headerImage.setVisibility(View.GONE);
+        controlLayoutwait.setVisibility(View.GONE);
+        controlLayout.setVisibility(View.VISIBLE);
+        calltext.setVisibility(View.GONE);
+        introTextView.setVisibility(View.GONE);
+    }
 
     //初始化视频界面
     @ReactMethod
     public void _init(ReadableMap options){
+        this.options = options;
         Activity activity = getCurrentActivity();
+        mSurfaceViews = new SparseArray<SurfaceView>();
         if (activity != null){
-//            //定义全屏参数
-//            int flag= WindowManager.LayoutParams.FLAG_FULLSCREEN;
-//            //获得当前窗体对象
-//            Window window = activity.getWindow();
-//            //设置当前窗体为全屏显示
-//            window.setFlags(flag, flag);
+            mHandler = new MyHandle();
             ChannelFlag = false;
             channelID = options.getString("channelName");
             appID = options.getString("appId");
             header = options.getString("remoteHeader");
             channelKey = options.getString("channelKey");
             remoteName = options.getString("remoteName");
-//            account = options.getString("account");
-//            postUrl = options.getString("postUrl");
             netStatus = options.getString("netStatus");
             callState = options.getString("callState");
             introText = options.getString("introText");
@@ -185,14 +277,91 @@ public class RNReactNativeAgoraVideochatModule extends ReactContextBaseJavaModul
             muteImage = options.getString("muteImage");
             unmuteImage = options.getString("unmuteImage");
             switchcameraImage = options.getString("switchcameraImage");
-
+            Log.d(TAG, "_init:呼入状态 :" + callState);
             if (callState.equals("inCome")){
+                Log.d(TAG, "_init: income");
                 view = activity.getLayoutInflater().inflate(R.layout.activity_video_chat_view, null);
+                mainLayout = (RelativeLayout) view.findViewById(R.id.activity_video_chat_view);
                 container = (RelativeLayout) view.findViewById(R.id.container);
                 headerImage = (CircleImageView) view.findViewById(R.id.header);
-
                 hangUpImage = (ImageView) view.findViewById(R.id.hangUpImage);
                 hangInImage = (ImageView) view.findViewById(R.id.hangInImage);
+                audioMute = (ImageView) view.findViewById(R.id.audioMute);
+                hangup = (ImageView) view.findViewById(R.id.hangup);
+                switchCamera = (ImageView) view.findViewById(R.id.switchCamera);
+
+                normalLoadBackground = new NormalLoadBackground();
+                normalLoadBackground.getPicture(backgroundImage,container);
+
+                loadPictrueHeader = new NormalLoadPictrue();
+                loadPictrueHeader.getPicture(header,headerImage);
+
+                loadPictrueHangin = new NormalLoadPictrue();
+                loadPictrueHangin.getPicture(hanginImageUrl,hangInImage);
+
+                loadPictrueHangup = new NormalLoadPictrue();
+                loadPictrueHangup.getPicture(hangupImageUrl,hangUpImage);
+
+                loadPictruehangupWait = new NormalLoadPictrue();
+                loadPictruehangupWait.getPicture(hangupImageUrl,hangup);
+
+                loadPictrueUnmute = new NormalLoadPictrue();
+                loadPictrueUnmute.getPicture(unmuteImage,audioMute);
+
+                loadPictrueSwitchCamera = new NormalLoadPictrue();
+                loadPictrueSwitchCamera.getPicture(switchcameraImage,switchCamera);
+
+                controlLayoutwait = (LinearLayout) view.findViewById(R.id.controlLayoutwait);
+                controlLayout = (LinearLayout) view.findViewById(R.id.controlLayout);
+                calltext = (TextView) view.findViewById(R.id.calltext);
+                introTextView = (TextView) view.findViewById(R.id.introText);
+                netStatusTextView = (TextView) view.findViewById(R.id.netStatus);
+
+                if (netStatus.equals("WIFI") || netStatus.equals("wifi")){
+                    netStatusTextView.setText("您正在使用WIFI网络,通话免费");
+                } else {
+                    netStatusTextView.setText("您正在使用数据网络,可能会产生一定费用");
+                }
+                introTextView.setText(introText);
+
+                hangUpImage.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        onHangUp();
+                    }
+                });
+
+                hangInImage.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        onHangIn();
+                    }
+                });
+
+                hangup.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        onEncCallClicked();
+                    }
+                });
+
+                switchCamera.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        onSwitchCameraClicked(view);
+                    }
+                });
+
+                audioMute.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        onLocalAudioMuteClicked(view);
+                    }
+                });
+
+
+                calltext.setText(remoteName);
+                controlLayout.setVisibility(View.GONE);
 
                 audioMute = (ImageView) view.findViewById(R.id.audioMute);
                 hangup = (ImageView) view.findViewById(R.id.hangup);
@@ -246,10 +415,35 @@ public class RNReactNativeAgoraVideochatModule extends ReactContextBaseJavaModul
                     }
                 });
 
+                hangup.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        onEncCallClicked();
+                    }
+                });
+
+                switchCamera.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        onSwitchCameraClicked(view);
+                    }
+                });
+
+                audioMute.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        onLocalAudioMuteClicked(view);
+                    }
+                });
+
+
                 calltext.setText(remoteName);
                 controlLayout.setVisibility(View.GONE);
+
             } else if (callState.equals("outPut")) {
+                Log.d(TAG, "_init: output");
                 view = activity.getLayoutInflater().inflate(R.layout.activity_video_chat_output, null);
+                mainLayout = (RelativeLayout) view.findViewById(R.id.activity_video_chat_view);
                 headerImage = (CircleImageView) view.findViewById(R.id.header);
                 headerImage.setDrawingCacheEnabled(true);
 
@@ -286,7 +480,28 @@ public class RNReactNativeAgoraVideochatModule extends ReactContextBaseJavaModul
                 hangUpImage.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        onEncCallClickedwait();
+                        onEndCallClickedwait();
+                    }
+                });
+
+                hangup.setOnClickListener((new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        onEncCallClicked();
+                    }
+                }));
+
+                switchCamera.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        onSwitchCameraClicked(view);
+                    }
+                });
+
+                audioMute.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        onLocalAudioMuteClicked(view);
                     }
                 });
 
@@ -294,7 +509,7 @@ public class RNReactNativeAgoraVideochatModule extends ReactContextBaseJavaModul
                 initAgoraEngineAndJoinChannel();
                 setupVideoProfile();
                 setupLocalVideo();
-
+                joinChannel();
             }
 
             if (dialog == null) {
@@ -321,52 +536,6 @@ public class RNReactNativeAgoraVideochatModule extends ReactContextBaseJavaModul
         initializeAgoraEngine();     // Tutorial Step 1
     }
 
-
-//    public boolean checkSelfPermission(String permission, int requestCode) {
-//        Log.i(TAG, "checkSelfPermission " + permission + " " + requestCode);
-//        if (ContextCompat.checkSelfPermission(this,
-//                permission)
-//                != PackageManager.PERMISSION_GRANTED) {
-//
-//            ActivityCompat.requestPermissions(this,
-//                    new String[]{permission},
-//                    requestCode);
-//            return false;
-//        }
-//        return true;
-//    }
-
-//    @Override
-//    public void onRequestPermissionsResult(int requestCode,
-//                                           @NonNull String permissions[], @NonNull int[] grantResults) {
-////        Log.i(TAG, "onRequestPermissionsResult " + grantResults[0] + " " + requestCode);
-//
-//        switch (requestCode) {
-//            case PERMISSION_REQ_ID_RECORD_AUDIO: {
-//                if (grantResults.length > 0
-//                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-//                    checkSelfPermission(Manifest.permission.CAMERA, PERMISSION_REQ_ID_CAMERA);
-//                } else {
-//                    showLongToast("No permission for " + Manifest.permission.RECORD_AUDIO);
-//                    finish();
-//                }
-//                break;
-//            }
-//            case PERMISSION_REQ_ID_CAMERA: {
-//                if (grantResults.length > 0
-//                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-//                    initAgoraEngineAndJoinChannel();
-//                } else {
-//                    showLongToast("No permission for " + Manifest.permission.CAMERA);
-//                    finish();
-//                }
-//                break;
-//            }
-//        }
-//    }
-
-
-
     // Tutorial Step 10
     public void onLocalVideoMuteClicked(View view) {
         ImageView iv = (ImageView) view;
@@ -389,6 +558,7 @@ public class RNReactNativeAgoraVideochatModule extends ReactContextBaseJavaModul
     // Tutorial Step 9
     public void onLocalAudioMuteClicked(View view) {
         ImageView iv = (ImageView) view;
+
         if (iv.isSelected()) {
             iv.setSelected(false);
 //            iv.clearColorFilter();
@@ -407,38 +577,32 @@ public class RNReactNativeAgoraVideochatModule extends ReactContextBaseJavaModul
         mRtcEngine.switchCamera();
     }
 
-    // Tutorial Step 6
-    public void onEncCallClicked(View view) {
-        commonEvent("hangup");
-        mRtcEngine.leaveChannel();
-        hide();
-    }
-
-
     // Tutorial Step 1
     private void initializeAgoraEngine() {
+        Log.d(TAG, "initializeAgoraEngine: 111111");
         mRtcEngine = RtcEngine.create(mContent, appID, mRtcEventHandler);
-//        mRtcEngine.setSpeakerphoneVolume(255);
-//        mRtcEngine.setEnableSpeakerphone(true);
+
+        Log.d(TAG, "initializeAgoraEngine: 111111" + mRtcEngine);
     }
 
     // Tutorial Step 2
     private void setupVideoProfile() {
+        Log.d(TAG, "setupVideoProfile: 222222");
         mRtcEngine.enableVideo();
         mRtcEngine.setVideoProfile(Constants.VIDEO_PROFILE_720P, false);
     }
 
     // Tutorial Step 3
     private void setupLocalVideo() {
+        Log.d(TAG, "setupLocalVideo: 33333");
+        SurfaceView localSurfaceView = RtcEngine.CreateRendererView(getReactApplicationContext());
+        localSurfaceView.setZOrderMediaOverlay(true);
         localContent = (FrameLayout) view.findViewById(R.id.local_video_view_container);
-        SurfaceView surfaceView = RtcEngine.CreateRendererView(mContent);
-        surfaceView.setZOrderMediaOverlay(true);
-        localContent.addView(surfaceView);
-        mRtcEngine.setupLocalVideo(new VideoCanvas(surfaceView, VideoCanvas.RENDER_MODE_HIDDEN, 0));
+        localContent.addView(localSurfaceView);
+        mRtcEngine.setupLocalVideo(new VideoCanvas(localSurfaceView, VideoCanvas.RENDER_MODE_HIDDEN, 0));
         if (callState.equals("outPut")){
             mRtcEngine.startPreview();
         }
-
     }
 
     // Tutorial Step 4
@@ -449,8 +613,8 @@ public class RNReactNativeAgoraVideochatModule extends ReactContextBaseJavaModul
     }
 
     // Tutorial Step 5
-    private void setupRemoteVideo(int uid) {
-        Log.d(TAG, "setupRemoteVideo: " + uid);
+    private void setupRemoteVideo(final int uid) {
+        final int myUid = uid;
         remoteContent = (FrameLayout) view.findViewById(R.id.remote_video_view_container);
         remoteContent.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -465,29 +629,17 @@ public class RNReactNativeAgoraVideochatModule extends ReactContextBaseJavaModul
         if (remoteContent.getChildCount() >= 1) {
             return;
         }
-
-        SurfaceView surfaceView = RtcEngine.CreateRendererView(mContent);
-        remoteContent.addView(surfaceView);
-        mRtcEngine.setupRemoteVideo(new VideoCanvas(surfaceView, VideoCanvas.RENDER_MODE_HIDDEN, uid));
-
-        surfaceView.setTag(uid); // for mark purpose
-
-        RelativeLayout.LayoutParams frameParams = (RelativeLayout.LayoutParams) localContent.getLayoutParams();
-        frameParams.width = 300;
-        frameParams.height = 400;
-        frameParams.setMargins(0,50,50,0);
-        localContent.setLayoutParams(frameParams);
-
-
-        container.setBackgroundResource(0);
-        remoteContent.setVisibility(View.VISIBLE);
-        localContent.setVisibility(View.VISIBLE);
-        headerImage.setVisibility(View.GONE);
-        controlLayoutwait.setVisibility(View.GONE);
-        controlLayout.setVisibility(View.VISIBLE);
-        calltext.setVisibility(View.GONE);
-        introTextView.setVisibility(View.GONE);
-        netStatusTextView.setVisibility(View.GONE);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Message msg = new Message();
+                msg.what = REMOTEVIDEO_FLAG;
+                Bundle bundle = new Bundle();
+                bundle.putInt("uid",myUid);
+                msg.setData(bundle);
+                mHandler.sendMessage(msg);
+            }
+        }).start();
     }
 
     // Tutorial Step 6
@@ -498,8 +650,8 @@ public class RNReactNativeAgoraVideochatModule extends ReactContextBaseJavaModul
 
     // Tutorial Step 7
     private void onRemoteUserLeft() {
-        FrameLayout container = (FrameLayout) view.findViewById(R.id.remote_video_view_container);
-        container.removeAllViews();
+//        FrameLayout container = (FrameLayout) view.findViewById(R.id.remote_video_view_container);
+//        container.removeAllViews();
         mRtcEngine.leaveChannel();
         commonEvent("hangupByPeer");
         hide();
@@ -528,17 +680,23 @@ public class RNReactNativeAgoraVideochatModule extends ReactContextBaseJavaModul
     private void onHangIn(){
         Log.d(TAG, "onHangIn");
         commonEvent("hangin");
-//        initAgoraEngineAndJoinChannel();
-//        setupVideoProfile();         // Tutorial Step 2
-//        setupLocalVideo();           // Tutorial Step 3
-//        joinChannel();
+        initAgoraEngineAndJoinChannel();
+        setupVideoProfile();         // Tutorial Step 2
+        setupLocalVideo();           // Tutorial Step 3
+        joinChannel();
     }
 
-    private void onEncCallClickedwait(){
+    private void onEndCallClickedwait(){
         commonEvent("hangupCalling");
+//        localContent.removeAllViews();
         hide();
     }
 
+    public void onEncCallClicked() {
+        commonEvent("hangup");
+        mRtcEngine.leaveChannel();
+        hide();
+    }
 
     @ReactMethod
     public void show() {
@@ -557,9 +715,13 @@ public class RNReactNativeAgoraVideochatModule extends ReactContextBaseJavaModul
         }
         if (dialog.isShowing()) {
             if (ChannelFlag) {
+                callState = null;
+                view = null;
                 mRtcEngine.leaveChannel();
+                mRtcEngine.stopPreview();
             }
             dialog.dismiss();
+            dialog = null;
         }
     }
 
